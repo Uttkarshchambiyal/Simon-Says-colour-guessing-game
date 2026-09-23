@@ -72,6 +72,7 @@ let userInp = [];
 
 let randColour = [];
 
+let best = 0;
 let level = 0;
 let score = 0;
 
@@ -184,6 +185,13 @@ function checkAnswer() {
 function gameOver() {
 
     start = false;
+
+    if (best < score) {
+        best = score;
+        highscoreDisplay.innerText = score;
+    } else {
+        highscoreDisplay.innerHTML = best;
+    }
     statusMsg.innerText = "Game Over!";
 
     colorGrid.classList.add("game-over");
@@ -205,6 +213,7 @@ resetBtn.addEventListener('click', function() {
 
     level = 0;
     score = 0;
+    highscoreDisplay.innerText = 0;
 
     levelDisplay.innerText = 0;
     scoreDisplay.innerText = 0;
@@ -213,25 +222,3 @@ resetBtn.addEventListener('click', function() {
 
 
 })
-
-// 2. GENERATING THE PATTERN
-//    - Pick a random color: colors[Math.floor(Math.random() * colors.length)]
-//    - Push it into your sequence array each round
-//
-// 3. PLAYING THE PATTERN (flashing buttons)
-//    - Loop through the sequence with setTimeout or setInterval
-//    - For each color, find the button and add "flash" class
-//    - After a delay, remove "flash" class
-//
-// 4. HANDLING USER INPUT
-//    - Add click listeners to colorBtns
-//    - Compare the clicked color (btn.dataset.color) with the expected color
-//    - If correct → move to next step, if last step → next level!
-//    - If wrong → game over!
-//
-// 5. GAME OVER
-//    - Add "game-over" class to colorGrid for shake effect
-//    - Update statusMsg.innerText = "Game Over!"
-//    - Save high score if current score is higher
-//
-// Happy coding! 🎮

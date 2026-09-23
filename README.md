@@ -194,3 +194,4 @@ Feel free to check the [issues page](https://github.com/Uttkarshchambiyal/Simon-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:e94560,25:3498db,50:2ecc71,75:f1c40f,100:e94560&height=120&section=footer" width="100%"/>
 
 </div>
+
