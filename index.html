@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Says Game</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================== MAIN GAME CONTAINER ==================== -->
+    <!-- This wraps the entire game. Use id="game-container" to access it -->
+    <div id="game-container">
+
+        <!-- ========== GAME HEADER / TITLE SECTION ========== -->
+        <!-- Displays the game title -->
+        <h1 id="game-title">Simon Says</h1>
+
+        <!-- ========== INFO PANEL ========== -->
+        <!-- Shows the current level and score to the player -->
+        <div id="info-panel">
+
+            <!-- Current level display - update innerText to show current level number -->
+            <div class="info-box">
+                <span class="info-label">Level</span>
+                <span id="level-display" class="info-value">0</span>
+            </div>
+
+            <!-- Current score display - update innerText to show score -->
+            <div class="info-box">
+                <span class="info-label">Score</span>
+                <span id="score-display" class="info-value">0</span>
+            </div>
+
+            <!-- High score display - update innerText to show highest score achieved -->
+            <div class="info-box">
+                <span class="info-label">Best</span>
+                <span id="highscore-display" class="info-value">0</span>
+            </div>
+        </div>
+
+        <!-- ========== STATUS MESSAGE ========== -->
+        <!-- Use this to show messages like "Watch the pattern!", "Your turn!", "Game Over!" -->
+        <!-- Update innerText to change the message shown to the player -->
+        <p id="status-message">Press Start to Play!</p>
+
+        <!-- ========== COLOR BUTTONS GRID ========== -->
+        <!-- The 4 colored game buttons arranged in a 2x2 grid -->
+        <!-- Each button has a unique id and a data-color attribute for easy identification -->
+        <!-- Use "flash" class to light up a button, remove it to turn it off -->
+        <div id="color-grid">
+
+            <!-- Top-left: GREEN button -->
+            <div id="green-btn" class="color-btn green" data-color="green"></div>
+
+            <!-- Top-right: RED button -->
+            <div id="red-btn" class="color-btn red" data-color="red"></div>
+
+            <!-- Bottom-left: YELLOW button -->
+            <div id="yellow-btn" class="color-btn yellow" data-color="yellow"></div>
+
+            <!-- Bottom-right: BLUE button -->
+            <div id="blue-btn" class="color-btn blue" data-color="blue"></div>
+
+        </div>
+
+        <!-- ========== CONTROL BUTTONS ========== -->
+        <!-- Start and Reset buttons for game control -->
+        <div id="controls">
+
+            <!-- Start button - click to begin a new game -->
+            <button id="start-btn" class="control-btn primary-btn">Start Game</button>
+
+            <!-- Reset button - click to reset the game completely -->
+            <button id="reset-btn" class="control-btn secondary-btn">Reset</button>
+
+        </div>
+
+    </div>
+
+    <!-- Link to external JS file (loaded after DOM is ready) -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

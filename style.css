@@ -1,0 +1,604 @@
+/* ==================== RESET & BASE ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a14;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #f0f0f5;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* ==================== BACKGROUND ORBS ==================== */
+
+
+/* These MUST be vibrant — they're what you see through the glass */
+
+#bg-effects {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbDrift 20s ease-in-out infinite;
+}
+
+
+/* Vivid, saturated colors so they bleed beautifully through the glass */
+
+.orb-1 {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(255, 59, 95, 0.7), transparent 70%);
+    top: -20%;
+    left: -12%;
+    animation-duration: 24s;
+}
+
+.orb-2 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(50, 150, 255, 0.65), transparent 70%);
+    bottom: -15%;
+    right: -10%;
+    animation-duration: 20s;
+    animation-delay: -6s;
+}
+
+.orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.6), transparent 70%);
+    top: 40%;
+    left: 55%;
+    animation-duration: 26s;
+    animation-delay: -12s;
+}
+
+.orb-4 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.55), transparent 70%);
+    top: 65%;
+    left: -8%;
+    animation-duration: 22s;
+    animation-delay: -16s;
+}
+
+.orb-5 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.5), transparent 70%);
+    top: -5%;
+    right: 20%;
+    animation-duration: 28s;
+    animation-delay: -8s;
+}
+
+@keyframes orbDrift {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(50px, -40px) scale(1.08);
+    }
+    50% {
+        transform: translate(-30px, 30px) scale(0.94);
+    }
+    75% {
+        transform: translate(40px, 50px) scale(1.04);
+    }
+}
+
+
+/* ==================== LIQUID GLASS — MAIN CARD ==================== */
+
+#game-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 56px;
+    /* ---- THE LIQUID GLASS EFFECT ---- */
+    /* 1) Very transparent background so orbs bleed through */
+    background: rgba(255, 255, 255, 0.05);
+    /* 2) Heavy blur — this creates the frosted/liquid glass look */
+    backdrop-filter: blur(60px) saturate(1.6) brightness(1.05);
+    -webkit-backdrop-filter: blur(60px) saturate(1.6) brightness(1.05);
+    /* 3) Soft rounded corners (iOS style) */
+    border-radius: 32px;
+    /* 4) Specular border — thin bright top/left, subtle elsewhere */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top-color: rgba(255, 255, 255, 0.25);
+    border-left-color: rgba(255, 255, 255, 0.18);
+    /* 5) Layered shadows for depth + inner light */
+    box-shadow: /* Outer soft shadow */
+    0 20px 60px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.2), /* Inner top highlight — simulates light refraction */
+    inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+
+
+/* Top specular edge reflection (like light hitting glass) */
+
+.glass-edge {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.35), transparent);
+    border-radius: 1px;
+    pointer-events: none;
+}
+
+
+/* ==================== HEADER ==================== */
+
+#game-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+
+/* Glass pill badge */
+
+#badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+}
+
+
+/* Title */
+
+#game-title {
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: #ffffff;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.12);
+}
+
+
+/* Subtitle */
+
+#game-subtitle {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+
+/* ==================== INFO PANEL — Glass Pill Bar ==================== */
+
+#info-panel {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    padding: 4px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 28px;
+    border-radius: 14px;
+    transition: background 0.3s ease;
+}
+
+.info-box:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.info-divider {
+    width: 1px;
+    height: 28px;
+    background: linear-gradient( 180deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+.info-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+
+/* ==================== STATUS MESSAGE ==================== */
+
+#status-message {
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.3px;
+    min-height: 24px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+
+/* ==================== COLOR GRID — Glass Tray ==================== */
+
+#color-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* ========== COLOR BUTTONS — Glass Lozenge Style ========== */
+
+.color-btn {
+    width: 148px;
+    height: 148px;
+    border-radius: 24px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, filter 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+
+/* Top gloss — simulates light hitting the top edge of glass */
+
+.btn-gloss {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    border-radius: 24px 24px 50% 50%;
+    background: linear-gradient( 180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 100%);
+    pointer-events: none;
+}
+
+
+/* Bottom-right reflection spot */
+
+.btn-reflection {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient( circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.color-btn:hover {
+    transform: scale(1.07);
+}
+
+.color-btn:active {
+    transform: scale(0.94);
+}
+
+
+/* ========== INDIVIDUAL GLASS BUTTONS ========== */
+
+
+/* Each uses a semi-transparent gradient + colored glow for that liquid glass look */
+
+.color-btn.green {
+    background: linear-gradient( 145deg, rgba(52, 211, 153, 0.75), rgba(16, 185, 129, 0.55));
+    box-shadow: 0 8px 28px rgba(52, 211, 153, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.color-btn.red {
+    background: linear-gradient( 145deg, rgba(248, 113, 113, 0.75), rgba(239, 68, 68, 0.55));
+    box-shadow: 0 8px 28px rgba(248, 113, 113, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.color-btn.yellow {
+    background: linear-gradient( 145deg, rgba(251, 191, 36, 0.75), rgba(245, 158, 11, 0.55));
+    box-shadow: 0 8px 28px rgba(251, 191, 36, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.color-btn.blue {
+    background: linear-gradient( 145deg, rgba(96, 165, 250, 0.75), rgba(59, 130, 246, 0.55));
+    box-shadow: 0 8px 28px rgba(96, 165, 250, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* ========== FLASH CLASS — Intense Glass Glow ========== */
+
+.color-btn.flash {
+    filter: brightness(2) saturate(1.4);
+    transform: scale(1.1);
+}
+
+.color-btn.green.flash {
+    box-shadow: 0 0 30px rgba(52, 211, 153, 0.7), 0 0 60px rgba(52, 211, 153, 0.35), 0 0 120px rgba(52, 211, 153, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(52, 211, 153, 0.6);
+}
+
+.color-btn.red.flash {
+    box-shadow: 0 0 30px rgba(248, 113, 113, 0.7), 0 0 60px rgba(248, 113, 113, 0.35), 0 0 120px rgba(248, 113, 113, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(248, 113, 113, 0.6);
+}
+
+.color-btn.yellow.flash {
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.7), 0 0 60px rgba(251, 191, 36, 0.35), 0 0 120px rgba(251, 191, 36, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(251, 191, 36, 0.6);
+}
+
+.color-btn.blue.flash {
+    box-shadow: 0 0 30px rgba(96, 165, 250, 0.7), 0 0 60px rgba(96, 165, 250, 0.35), 0 0 120px rgba(96, 165, 250, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(96, 165, 250, 0.6);
+}
+
+
+/* ========== USER-CLICK CLASS ========== */
+
+.color-btn.user-click {
+    filter: brightness(1.6) saturate(1.2);
+    transform: scale(0.95);
+}
+
+
+/* ==================== CONTROL BUTTONS — Glass Pills ==================== */
+
+#controls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-icon {
+    font-size: 0.85rem;
+    display: inline-flex;
+}
+
+
+/* Start — primary CTA with glass tint */
+
+.primary-btn {
+    background: linear-gradient( 135deg, rgba(236, 72, 106, 0.7), rgba(200, 50, 80, 0.5));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(236, 72, 106, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(236, 72, 106, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 35px rgba(236, 72, 106, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.primary-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+
+/* Reset — ghost glass button */
+
+.secondary-btn {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(255, 255, 255, 0.06));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(147, 197, 253, 0.28);
+    border-top-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 4px 18px rgba(59, 130, 246, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.secondary-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Disabled */
+
+.control-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ==================== GAME OVER SHAKE ==================== */
+
+.game-over {
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(-10px) rotate(-1deg);
+    }
+    20% {
+        transform: translateX(10px) rotate(1deg);
+    }
+    30% {
+        transform: translateX(-10px) rotate(-0.5deg);
+    }
+    40% {
+        transform: translateX(10px) rotate(0.5deg);
+    }
+    50% {
+        transform: translateX(-6px);
+    }
+    60% {
+        transform: translateX(6px);
+    }
+    70% {
+        transform: translateX(-3px);
+    }
+    80% {
+        transform: translateX(3px);
+    }
+}
+
+
+/* ==================== FOOTER ==================== */
+
+#game-footer {
+    margin-top: 28px;
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.15);
+    letter-spacing: 0.5px;
+}
+
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 520px) {
+    #game-container {
+        padding: 32px 22px;
+        border-radius: 24px;
+    }
+    #game-title {
+        font-size: 2.4rem;
+    }
+    #game-subtitle {
+        font-size: 0.72rem;
+        letter-spacing: 2.5px;
+    }
+    .color-btn {
+        width: 118px;
+        height: 118px;
+        border-radius: 20px;
+    }
+    #color-grid {
+        gap: 10px;
+        padding: 12px;
+        border-radius: 22px;
+    }
+    .info-box {
+        padding: 10px 18px;
+    }
+    .info-value {
+        font-size: 1.4rem;
+    }
+    .control-btn {
+        padding: 12px 22px;
+        font-size: 0.78rem;
+    }
+    .orb {
+        filter: blur(60px);
+        opacity: 0.8;
+    }
+}
+
+@media (max-width: 380px) {
+    .color-btn {
+        width: 96px;
+        height: 96px;
+        border-radius: 16px;
+    }
+    #game-container {
+        padding: 24px 16px;
+    }
+    #color-grid {
+        gap: 8px;
+        padding: 10px;
+    }
+}
